@@ -1,0 +1,21 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.yml]
+indent_size = 2
+
+[*.fsproj]
+indent_size = 2
+
+[*.{fs,fsx,fsi}]
+indent_size = 4
+fsharp_multiline_block_brackets_on_same_column = true
