@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>EveMaterialCalculator.AvaloniaApp</AssemblyName>
+    <RootNamespace>EveMaterialCalculator.AvaloniaApp</RootNamespace>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Core/EveMaterialCalculator.Core.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\*" />
+    <Compile Include="Config.fs" />
+    <Compile Include="App.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+
+</Project>

@@ -5,10 +5,10 @@ open RunHelpers.BasicShortcuts
 
 [<RequireQualifiedAccess>]
 module Config =
-    let projectName = "EveMaterialCalculator"
+    let projectName = "EveMaterialCalculator.AvaloniaApp"
 
     let mainProject =
-        $"./src/EveMaterialCalculator/%s{projectName}.fsproj"
+        $"./src/EveMaterialCalculator/AvaloniaApp/%s{projectName}.fsproj"
 
     let artifactName = projectName
 

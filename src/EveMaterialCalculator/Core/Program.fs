@@ -1,4 +1,4 @@
-namespace EveMaterialCalculator
+namespace EveMaterialCalculator.Core
 
 module Program =
     [<EntryPoint>]

@@ -1,4 +1,4 @@
-namespace EveMaterialCalculator
+namespace EveMaterialCalculator.Core
 
 open FSharp.Data
 open ICSharpCode.SharpZipLib.BZip2

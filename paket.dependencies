@@ -5,3 +5,8 @@ framework: auto-detect
 nuget FSharp.Core content: none
 nuget FSharp.Data
 nuget SharpZipLib
+
+nuget JaggerJo.Avalonia.FuncUI 0.5.0-beta
+nuget JaggerJo.Avalonia.FuncUI.DSL 0.5.0-beta
+nuget JaggerJo.Avalonia.FuncUI.Elmish 0.5.0-beta
+nuget Avalonia.Diagnostics
