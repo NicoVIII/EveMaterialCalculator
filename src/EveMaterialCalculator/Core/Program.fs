@@ -3,9 +3,6 @@ namespace EveMaterialCalculator.Core
 module Program =
     [<EntryPoint>]
     let main _ =
-        // At first we download the needed data from the static file export
-        DataDownload.start ()
-
         let types =
             InvTypes.loadRows ()
             |> Seq.map (fun row -> TypeID.create row.TypeID, row)

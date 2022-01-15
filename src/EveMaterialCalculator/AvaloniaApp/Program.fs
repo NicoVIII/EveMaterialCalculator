@@ -32,7 +32,7 @@ module Program =
             |> ignore
 #endif
 
-            Program.mkSimple App.init App.update App.render
+            Program.mkProgram App.init App.update App.render
             |> Program.withHost this
 #if DEBUG
             |> Program.withConsoleTrace

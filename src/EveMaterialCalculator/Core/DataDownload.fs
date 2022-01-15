@@ -30,8 +30,7 @@ module DataDownload =
             Directory.CreateDirectory(Path.GetDirectoryName(outputFile: string))
             |> ignore
 
-            use outputFile =
-                new FileStream(outputFile, FileMode.Create)
+            use outputFile = new FileStream(outputFile, FileMode.Create)
 
             do!
                 request.ResponseStream.CopyToAsync(outputFile)
@@ -60,8 +59,7 @@ module DataDownload =
     let start () =
         List.choose
             (fun csv ->
-                let csvPath =
-                    Path.GetFullPath($"%s{basePath}/%s{csv}.csv")
+                let csvPath = Path.GetFullPath($"%s{basePath}/%s{csv}.csv")
 
                 if not (File.Exists csvPath) then
                     let url = $"%s{baseUrl}/%s{csv}.csv.bz2"
@@ -80,5 +78,3 @@ module DataDownload =
                     None)
             necessaryCsvs
         |> Async.Sequential
-        |> Async.RunSynchronously
-        |> ignore
