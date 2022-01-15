@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "run", "run.fsproj", "{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{08BDABCB-1167-4725-B179-469F0B1F0E79}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EveMaterialCalculator", "src\EveMaterialCalculator\EveMaterialCalculator.fsproj", "{B35F00C5-AC01-468E-8C9C-5DD4355891DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Debug|x64.Build.0 = Debug|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Debug|x86.Build.0 = Debug|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Release|x64.ActiveCfg = Release|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Release|x64.Build.0 = Release|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{6B5B5AC6-E7BB-4CC5-B724-86095F11A9C3}.Release|x86.Build.0 = Release|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Debug|x64.Build.0 = Debug|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Debug|x86.Build.0 = Debug|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Release|x64.ActiveCfg = Release|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Release|x64.Build.0 = Release|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Release|x86.ActiveCfg = Release|Any CPU
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B35F00C5-AC01-468E-8C9C-5DD4355891DC} = {08BDABCB-1167-4725-B179-469F0B1F0E79}
+	EndGlobalSection
+EndGlobal
