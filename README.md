@@ -1,5 +1,8 @@
 # Eve Material Calculator
 
+![Last commit](https://img.shields.io/github/last-commit/NicoVIII/EveMaterialCalculator)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
+
 This project uses the SDE (Static Data Export) from EVE Online to calculate what
 is needed to craft an item.
 This is an early prototype.
