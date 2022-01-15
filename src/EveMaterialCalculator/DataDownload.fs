@@ -17,7 +17,18 @@ module DataDownload =
 
     let downloadFile url outputFile =
         async {
-            let! request = Http.AsyncRequestStream(url)
+            let! request =
+                Http.AsyncRequestStream(
+                    url,
+                    headers =
+                        [
+                            // Without a valid User-Agent we get a 403
+                            "User-Agent", "EveMaterialCalculator/1.0"
+                        ]
+                )
+
+            Directory.CreateDirectory(Path.GetDirectoryName(outputFile: string))
+            |> ignore
 
             use outputFile =
                 new FileStream(outputFile, FileMode.Create)
@@ -68,6 +79,6 @@ module DataDownload =
                     printfn $"Skip download of %s{csvPath}"
                     None)
             necessaryCsvs
-        |> Async.Parallel
+        |> Async.Sequential
         |> Async.RunSynchronously
         |> ignore

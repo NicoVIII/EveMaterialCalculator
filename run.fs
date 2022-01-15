@@ -1,7 +1,3 @@
-open System
-open System.IO
-open System.Runtime.InteropServices
-
 open Fake.IO
 
 open RunHelpers
@@ -9,8 +5,12 @@ open RunHelpers.BasicShortcuts
 
 [<RequireQualifiedAccess>]
 module Config =
+    let projectName = "EveMaterialCalculator"
+
     let mainProject =
-        "./src/EveMaterialCalculator/EveMaterialCalculator.fsproj"
+        $"./src/EveMaterialCalculator/%s{projectName}.fsproj"
+
+    let artifactName = projectName
 
     let packPath = "./deploy"
 
@@ -61,8 +61,8 @@ module Task =
                      yield! commonArgs ]
 
             Shell.mv
-                $"{Config.packPath}/MagicCollectionHelper.AvaloniaApp"
-                $"{Config.packPath}/MagicCollectionHelper-linux-x64"
+                $"%s{Config.packPath}/%s{Config.projectName}"
+                $"%s{Config.packPath}/%s{Config.artifactName}-linux-x64"
 
             // Windows
             dotnet [ "publish"
@@ -71,8 +71,8 @@ module Task =
                      yield! commonArgs ]
 
             Shell.mv
-                $"{Config.packPath}/MagicCollectionHelper.AvaloniaApp.exe"
-                $"{Config.packPath}/MagicCollectionHelper-win-x64.exe"
+                $"{Config.packPath}/%s{Config.projectName}.exe"
+                $"{Config.packPath}/%s{Config.artifactName}-win-x64.exe"
         }
 
 module Command =

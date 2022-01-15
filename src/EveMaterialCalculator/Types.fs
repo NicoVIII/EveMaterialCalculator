@@ -20,7 +20,7 @@ type Material =
 
 type Product = { typ: TypeID; product: TypeID }
 
-type InvTypes = CsvProvider<"../../sde/invTypes.csv", IgnoreErrors=true>
+type InvTypes = CsvProvider<"../../sde-static/invTypes.csv", IgnoreErrors=true>
 
 module InvTypes =
     let load () =
@@ -30,7 +30,7 @@ module InvTypes =
 
     let loadRows () = (load ()).Rows
 
-type IndustryActivityMaterials = CsvProvider<"../../sde/industryActivityMaterials.csv">
+type IndustryActivityMaterials = CsvProvider<"../../sde-static/industryActivityMaterials.csv">
 
 module IndustryActivityMaterials =
     let load () =
@@ -40,7 +40,7 @@ module IndustryActivityMaterials =
 
     let loadRows () = (load ()).Rows
 
-type IndustryActivityProducts = CsvProvider<"../../sde/industryActivityProducts.csv">
+type IndustryActivityProducts = CsvProvider<"../../sde-static/industryActivityProducts.csv">
 
 module IndustryActivityProducts =
     let load () =

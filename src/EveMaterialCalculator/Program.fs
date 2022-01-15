@@ -1,7 +1,5 @@
 namespace EveMaterialCalculator
 
-open System.IO
-
 module Program =
     [<EntryPoint>]
     let main _ =

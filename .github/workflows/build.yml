@@ -1,0 +1,40 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+
+jobs:
+  build:
+    name: Test building
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        dotnet: [5.0.100]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # http://man7.org/linux/man-pages/man1/date.1.html
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+        shell: bash
+      - name: Cache CSVs
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./sde-static
+          # We want to cache the files for a day
+          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - name: Download CSVs
+        run: ./download_csv.sh
+      - name: Build Andromeda
+        run: dotnet run build

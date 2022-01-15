@@ -6,3 +6,5 @@ packages/
 .fake/
 
 sde/
+sde-static/
+deploy/
