@@ -7,10 +7,9 @@ open RunHelpers.BasicShortcuts
 module Config =
     let projectName = "EveMaterialCalculator.AvaloniaApp"
 
-    let mainProject =
-        $"./src/EveMaterialCalculator/AvaloniaApp/%s{projectName}.fsproj"
+    let mainProject = $"./src/EveMaterialCalculator/AvaloniaApp/%s{projectName}.fsproj"
 
-    let artifactName = projectName
+    let artifactName = "EveMaterialCalculator"
 
     let packPath = "./deploy"
 
@@ -49,8 +48,8 @@ module Task =
                 Config.mainProject
             ]
 
-        Shell.rm Config.packPath
         Shell.mkdir Config.packPath
+        Shell.cleanDir Config.packPath
 
         job {
             // Linux

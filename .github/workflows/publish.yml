@@ -1,10 +1,9 @@
-name: Build
+name: Publish
 
 on:
   push:
     branches:
       - "main"
-  pull_request:
 
 jobs:
   build:
@@ -42,5 +41,15 @@ jobs:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Download CSVs
         run: ./download_csv.sh
-      - name: Build
-        run: dotnet run build
+      - name: Publish
+        run: dotnet run publish
+      - name: Release files
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: latest
+          prerelease: false
+          title: Continuous Build
+          files: |
+            LICENSE.txt
+            deploy/Eve*
