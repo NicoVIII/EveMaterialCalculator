@@ -49,3 +49,11 @@ module IndustryActivityProducts =
         |> IndustryActivityProducts.Load
 
     let loadRows () = (load ()).Rows
+
+type PreparedData =
+    {
+        materialMap: Map<TypeID, Material seq>
+        productMap: Map<TypeID, Product>
+        typeNameIdMap: Map<string, TypeID>
+        types: Map<TypeID, InvTypes.Row>
+    }
