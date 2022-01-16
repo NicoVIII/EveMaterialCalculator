@@ -67,15 +67,23 @@ module Data =
                 let archivePath = $"%s{csvPath}.bz2"
 
                 async {
+#if DEBUG
                     printfn $"Download %s{csvPath}..."
+#endif
                     do! downloadFile url archivePath
+#if DEBUG
                     printfn $"Extract %s{csvPath}..."
+#endif
                     do! extractCsv archivePath csvPath
+#if DEBUG
                     printfn $"Finished work for %s{csvPath}"
+#endif
                 }
                 |> Some
             else
+#if DEBUG
                 printfn $"Skip download of %s{csvPath}"
+#endif
                 None)
         |> Async.Sequential
         |> Async.Ignore

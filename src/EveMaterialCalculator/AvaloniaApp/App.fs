@@ -6,7 +6,6 @@ open Avalonia.FuncUI.Types
 open Avalonia.Layout
 open Avalonia.Media
 open Elmish
-open System.Text
 
 open EveMaterialCalculator.Core
 
@@ -89,13 +88,13 @@ module App =
                         TextBox.text state.search
                         TextBox.onTextChanged (SearchChanged >> dispatch)
                     ]
-                    let id = Map.tryFind state.search state.data.typeNameIdMap
+                    let typeId = Map.tryFind state.search state.data.typeNameIdMap
 
-                    match id with
-                    | Some id ->
+                    match typeId with
+                    | Some typeId ->
                         Button.create [
                             Button.content "Calculate basic materials"
-                            Button.onClick ((fun _ -> CalculateBasicMaterials id |> dispatch), OnChangeOf id)
+                            Button.onClick ((fun _ -> CalculateBasicMaterials typeId |> dispatch), OnChangeOf typeId)
                         ]
                     | None -> ()
 
@@ -115,12 +114,26 @@ module App =
                                     let typ = Map.find typeID state.data.types
 
                                     let histories =
+                                        let limit = 15
+
                                         histories
-                                        |> Seq.rev
+                                        |> Seq.truncate limit
                                         |> Seq.map (fun history ->
+                                            let limit = 3
+
                                             history
+                                            |> List.truncate limit
+                                            |> List.rev
                                             |> List.map (fun typeId -> (state.data.types.Item typeId).TypeName)
+                                            // Append ... if list was truncated
+                                            |> match List.length history with
+                                               | x when x > limit -> List.append [ "..." ]
+                                               | _ -> id
                                             |> String.concat " > ")
+                                        // Append ... if list was truncated
+                                        |> match Seq.length histories with
+                                           | x when x > limit -> (fun x -> Seq.append x [ "..." ])
+                                           | _ -> id
                                         |> String.concat "\n"
 
                                     TextBlock.create [

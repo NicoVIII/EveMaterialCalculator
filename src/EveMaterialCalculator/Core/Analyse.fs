@@ -15,7 +15,10 @@ module Analyse =
                 Map.tryFind searchedId preparedData.productMap
                 |> function
                     | Some product ->
-                        let neededQuantity = quantity / product.quantity
+                        let neededQuantity =
+                            ceil (float quantity / float product.quantity)
+                            |> int
+
                         getBasicMaterials history preparedData neededQuantity product.typ
                     | None -> seq { searchedId, quantity, seq { history } }
         |> Seq.groupBy (fun (x, _, _) -> x)
