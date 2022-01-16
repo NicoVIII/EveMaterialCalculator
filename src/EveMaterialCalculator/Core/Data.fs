@@ -97,6 +97,7 @@ module Data =
 
             let materialMap =
                 IndustryActivityMaterials.loadRows ()
+                |> Seq.filter (fun row -> row.ActivityID <> 8)
                 |> Seq.map (fun row ->
                     {
                         typ = row.TypeID |> TypeID.create
@@ -113,6 +114,7 @@ module Data =
                         {
                             typ = TypeID.create row.TypeID
                             product = TypeID.create row.ProductTypeID
+                            quantity = row.Quantity
                         }
 
                     product.product, product)

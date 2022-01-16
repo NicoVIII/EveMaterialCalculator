@@ -4,6 +4,7 @@ open Avalonia.Controls
 open Avalonia.FuncUI.DSL
 open Avalonia.FuncUI.Types
 open Avalonia.Layout
+open Avalonia.Media
 open Elmish
 open System.Text
 
@@ -13,7 +14,7 @@ module App =
     type ReadyState =
         {
             data: PreparedData
-            materials: (TypeID * int) seq
+            materials: (TypeID * int * TypeID list seq) seq
             search: string
         }
 
@@ -63,7 +64,7 @@ module App =
         | CalculateBasicMaterials id ->
             State.map
                 (fun ready ->
-                    let materials = Analyse.getBasicMaterials ready.data 1 id
+                    let materials = Analyse.getBasicMaterials [] ready.data 1 id
                     { ready with materials = materials })
                 state,
             Cmd.none
@@ -99,19 +100,35 @@ module App =
                     | None -> ()
 
                     if not (Seq.isEmpty state.materials) then
-                        let materials = StringBuilder()
-                        materials.AppendLine "Materials:" |> ignore
+                        StackPanel.create [
+                            StackPanel.margin (10., 10., 10., 10.)
+                            StackPanel.children [
+                                TextBlock.create [
+                                    TextBlock.fontWeight FontWeight.Bold
+                                    TextBlock.fontSize 14.
+                                    TextBlock.margin (0., 0., 0., 5.)
+                                    TextBlock.text "Materials:"
+                                ]
+                                for (typeID, quantity, histories) in
+                                    state.materials
+                                    |> Seq.sortByDescending (fun (_, x, _) -> x) do
+                                    let typ = Map.find typeID state.data.types
 
-                        for (typeID, quantity) in state.materials |> Seq.sortByDescending snd do
-                            let typ = Map.find typeID state.data.types
+                                    let histories =
+                                        histories
+                                        |> Seq.rev
+                                        |> Seq.map (fun history ->
+                                            history
+                                            |> List.map (fun typeId -> (state.data.types.Item typeId).TypeName)
+                                            |> String.concat " > ")
+                                        |> String.concat "\n"
 
-                            materials.AppendLine $"%8i{quantity}: %s{typ.TypeName}"
-                            |> ignore
-
-                        TextBlock.create [
-                            TextBlock.text (materials.ToString())
-                            TextBlock.fontFamily Config.monospaceFont
-                            TextBlock.margin (10., 10., 10., 10.)
+                                    TextBlock.create [
+                                        TextBlock.text $"%8i{quantity}: %s{typ.TypeName}"
+                                        TextBlock.tip histories
+                                        TextBlock.fontFamily Config.monospaceFont
+                                    ]
+                            ]
                         ]
                 ]
             ]

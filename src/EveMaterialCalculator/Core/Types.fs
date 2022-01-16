@@ -18,7 +18,12 @@ type Material =
         materialType: TypeID
     }
 
-type Product = { typ: TypeID; product: TypeID }
+type Product =
+    {
+        typ: TypeID
+        product: TypeID
+        quantity: int
+    }
 
 type InvTypes = CsvProvider<"../../../sde-static/invTypes.csv", IgnoreErrors=true>
 
