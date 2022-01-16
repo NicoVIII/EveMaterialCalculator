@@ -47,10 +47,11 @@ module Task =
                 "Release"
                 "-o"
                 Config.packPath
-                "/p:SelfContained=true"
+                "--self-contained"
                 "/p:PublishSingleFile=true"
                 "/p:PublishTrimmed=true"
-                "/p:TrimMode=Link"
+                "/p:PublishReadyToRun=true"
+                "/p:EnableCompressionInSingleFile=true"
                 "/p:IncludeNativeLibrariesForSelfExtract=true"
                 "/p:DebugType=None"
                 Config.mainProject
@@ -64,7 +65,6 @@ module Task =
             dotnet [ "publish"
                      "-r"
                      "linux-x64"
-                     "/p:PublishReadyToRun=true"
                      yield! commonArgs ]
 
             Shell.mv
