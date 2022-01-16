@@ -11,19 +11,27 @@ type TypeID = int<typeID>
 module TypeID =
     let inline create value : TypeID = value * 1<typeID>
 
-type Material =
+type Material = { typ: TypeID; needed: int }
+
+module Material =
+    let inline create typ needed : Material =
+        {
+            typ = TypeID.create typ
+            needed = needed
+        }
+
+type Production =
     {
-        typ: TypeID
-        quantity: int
-        materialType: TypeID
+        producedQuantity: int
+        materials: Material seq
     }
 
-type Product =
-    {
-        typ: TypeID
-        product: TypeID
-        quantity: int
-    }
+module Production =
+    let inline create producedQuantity materials : Production =
+        {
+            producedQuantity = producedQuantity
+            materials = materials
+        }
 
 type InvTypes = CsvProvider<"../../../sde-static/invTypes.csv", IgnoreErrors=true>
 
@@ -55,10 +63,20 @@ module IndustryActivityProducts =
 
     let loadRows () = (load ()).Rows
 
+type PlanetarySchematicsTypeMap = CsvProvider<"../../../sde-static/planetSchematicsTypeMap.csv">
+
+module PlanetarySchematicsTypeMap =
+    let load () =
+        "./sde/planetSchematicsTypeMap.csv"
+        |> Path.GetFullPath
+        |> PlanetarySchematicsTypeMap.Load
+
+    let loadRows () = (load ()).Rows
+
 type PreparedData =
     {
-        materialMap: Map<TypeID, Material seq>
-        productMap: Map<TypeID, Product>
+        // Contains blueprint crafting and planetary interaction
+        productions: Map<TypeID, Production>
         typeNameIdMap: Map<string, TypeID>
         types: Map<TypeID, InvTypes.Row>
     }

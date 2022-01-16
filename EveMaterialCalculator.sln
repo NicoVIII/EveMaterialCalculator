@@ -13,6 +13,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EveMaterialCalculator.Core"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EveMaterialCalculator.AvaloniaApp", "src\EveMaterialCalculator\AvaloniaApp\EveMaterialCalculator.AvaloniaApp.fsproj", "{A81E9B73-493E-4B13-96D6-2B89CD76C9C3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AABF088D-2CE4-46FD-9DC2-EBCC840AD0B7}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EveMaterialCalculator.Core.Tests", "tests\EveMaterialCalculator.Core\EveMaterialCalculator.Core.Tests.fsproj", "{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,10 +66,23 @@ Global
 		{A81E9B73-493E-4B13-96D6-2B89CD76C9C3}.Release|x64.Build.0 = Release|Any CPU
 		{A81E9B73-493E-4B13-96D6-2B89CD76C9C3}.Release|x86.ActiveCfg = Release|Any CPU
 		{A81E9B73-493E-4B13-96D6-2B89CD76C9C3}.Release|x86.Build.0 = Release|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Debug|x64.Build.0 = Debug|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Debug|x86.Build.0 = Debug|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Release|x64.ActiveCfg = Release|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Release|x64.Build.0 = Release|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Release|x86.ActiveCfg = Release|Any CPU
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E850B0F5-3544-4F9F-884A-E705250D812A} = {75BBF523-DCB7-4C48-A5B0-7FCF10BBC56F}
 		{998D66BC-778E-4FB6-A59D-E985399FAAA8} = {E850B0F5-3544-4F9F-884A-E705250D812A}
 		{A81E9B73-493E-4B13-96D6-2B89CD76C9C3} = {E850B0F5-3544-4F9F-884A-E705250D812A}
+		{AC1A6B46-FDE6-406F-BD3B-F4298F4BA7B0} = {AABF088D-2CE4-46FD-9DC2-EBCC840AD0B7}
 	EndGlobalSection
 EndGlobal

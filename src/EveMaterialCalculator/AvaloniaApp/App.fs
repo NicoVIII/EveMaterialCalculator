@@ -6,6 +6,7 @@ open Avalonia.FuncUI.Types
 open Avalonia.Layout
 open Avalonia.Media
 open Elmish
+open System
 
 open EveMaterialCalculator.Core
 
@@ -13,7 +14,7 @@ module App =
     type ReadyState =
         {
             data: PreparedData
-            materials: (TypeID * int * TypeID list seq) seq
+            materials: (TypeID * int64 * TypeID list seq) seq
             search: string
         }
 
@@ -63,7 +64,7 @@ module App =
         | CalculateBasicMaterials id ->
             State.map
                 (fun ready ->
-                    let materials = Analyse.getBasicMaterials [] ready.data 1 id
+                    let materials = Analyse.getBasicMaterials ready.data 1 id
                     { ready with materials = materials })
                 state,
             Cmd.none
@@ -119,7 +120,7 @@ module App =
                                         histories
                                         |> Seq.truncate limit
                                         |> Seq.map (fun history ->
-                                            let limit = 3
+                                            let limit = 4
 
                                             history
                                             |> List.truncate limit
@@ -136,8 +137,13 @@ module App =
                                            | _ -> id
                                         |> String.concat "\n"
 
+                                    let quantityString =
+                                        String
+                                            .Format("{0:#,#.###}", (quantity: int64))
+                                            .PadLeft(20)
+
                                     TextBlock.create [
-                                        TextBlock.text $"%8i{quantity}: %s{typ.TypeName}"
+                                        TextBlock.text $"%s{quantityString}: %s{typ.TypeName}"
                                         TextBlock.tip histories
                                         TextBlock.fontFamily Config.monospaceFont
                                     ]

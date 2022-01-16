@@ -14,3 +14,8 @@ if [ ! -f "$BASE_PATH/industryActivityProducts.csv" ]; then
     curl https://www.fuzzwork.co.uk/dump/latest/industryActivityProducts.csv.bz2 --output "$BASE_PATH/industryActivityProducts.csv.bz2"
     bzip2 -d "$BASE_PATH/industryActivityProducts.csv.bz2"
 fi
+if [ ! -f "$BASE_PATH/planetSchematicsTypeMap.csv" ]; then
+    mkdir -p "$BASE_PATH"
+    curl https://www.fuzzwork.co.uk/dump/latest/planetSchematicsTypeMap.csv.bz2 --output "$BASE_PATH/planetSchematicsTypeMap.csv.bz2"
+    bzip2 -d "$BASE_PATH/planetSchematicsTypeMap.csv.bz2"
+fi

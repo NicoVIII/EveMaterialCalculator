@@ -9,6 +9,9 @@ module Config =
 
     let mainProject = $"./src/EveMaterialCalculator/AvaloniaApp/%s{projectName}.fsproj"
 
+    let testProject =
+        $"./tests/EveMaterialCalculator.Core/EveMaterialCalculator.Core.Tests.fsproj"
+
     let artifactName = "EveMaterialCalculator"
 
     let packPath = "./deploy"
@@ -29,6 +32,11 @@ module Task =
         dotnet [ "run"
                  "--project"
                  Config.mainProject ]
+
+    let runTest () =
+        dotnet [ "run"
+                 "--project"
+                 Config.testProject ]
 
     let publish () =
         let commonArgs =
@@ -89,6 +97,12 @@ module Command =
             Task.run ()
         }
 
+    let test () =
+        job {
+            restore ()
+            Task.runTest ()
+        }
+
     let publish () =
         job {
             restore ()
@@ -104,6 +118,7 @@ let main args =
         | [ "build" ] -> Command.build ()
         | []
         | [ "run" ] -> Command.run ()
+        | [ "test" ] -> Command.test ()
         | [ "publish" ] -> Command.publish ()
         | _ ->
             let msg =

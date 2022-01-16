@@ -14,6 +14,7 @@ module Data =
             "invTypes"
             "industryActivityMaterials"
             "industryActivityProducts"
+            "planetSchematicsTypeMap"
         ]
 
     let downloadFile url outputFile =
@@ -103,35 +104,61 @@ module Data =
                 |> Seq.map (fun (id, row) -> row.TypeName, id)
                 |> Map.ofSeq
 
-            let materialMap =
-                IndustryActivityMaterials.loadRows ()
-                |> Seq.filter (fun row -> row.ActivityID <> 8)
-                |> Seq.map (fun row ->
-                    {
-                        typ = row.TypeID |> TypeID.create
-                        quantity = row.Quantity
-                        materialType = row.MaterialTypeID |> TypeID.create
-                    })
-                |> Seq.groupBy (fun material -> material.typ)
-                |> Map.ofSeq
-
             let productMap =
                 IndustryActivityProducts.loadRows ()
-                |> Seq.map (fun row ->
-                    let product =
+                |> Seq.groupBy (fun row -> row.TypeID)
+                |> Map.ofSeq
+
+            let blueprintProductions =
+                IndustryActivityMaterials.loadRows ()
+                |> Seq.filter (fun row -> row.ActivityID <> 8)
+                |> Seq.groupBy (fun row -> row.TypeID)
+                |> Seq.map (fun (typeIdValue, materialRows) ->
+                    let typeId, quantity =
+                        // Lookup if this is just a blueprint
+                        Map.tryFind typeIdValue productMap
+                        |> function
+                            | Some rows ->
+                                let row = Seq.head rows
+                                TypeID.create row.ProductTypeID, row.Quantity
+                            | None -> TypeID.create typeIdValue, 1
+
+                    let materials =
+                        materialRows
+                        |> Seq.map (fun row -> Material.create row.MaterialTypeID row.Quantity)
+
+                    typeId, Production.create 1 materials)
+
+            let planetaryProductions =
+                PlanetarySchematicsTypeMap.loadRows ()
+                |> Seq.groupBy (fun row -> row.SchematicID)
+                |> Seq.map (fun (schematicId, rows) ->
+                    let outputRow =
+                        // We assume, there is only one for now
+                        Seq.find (fun (row: PlanetarySchematicsTypeMap.Row) -> not row.IsInput) rows
+
+                    let materials =
+                        rows
+                        |> Seq.filter (fun row -> row.IsInput)
+                        |> Seq.map (fun row -> Material.create row.TypeID row.Quantity)
+
+                    let production =
                         {
-                            typ = TypeID.create row.TypeID
-                            product = TypeID.create row.ProductTypeID
-                            quantity = row.Quantity
+                            producedQuantity = outputRow.Quantity
+                            materials = materials
                         }
 
-                    product.product, product)
-                |> Map.ofSeq
+                    TypeID.create outputRow.TypeID, production)
 
             return
                 {
-                    materialMap = materialMap
-                    productMap = productMap
+                    productions =
+                        seq {
+                            blueprintProductions
+                            planetaryProductions
+                        }
+                        |> Seq.concat
+                        |> Map.ofSeq
                     typeNameIdMap = typeNameIdMap
                     types = types
                 }

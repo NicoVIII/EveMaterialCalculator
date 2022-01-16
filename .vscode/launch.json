@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/EveMaterialCalculator/AvaloniaApp/bin/Debug/net5.0/EveMaterialCalculator.AvaloniaApp.dll",
+            "program": "${workspaceFolder}/src/EveMaterialCalculator/AvaloniaApp/bin/Debug/net6.0/EveMaterialCalculator.AvaloniaApp.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
