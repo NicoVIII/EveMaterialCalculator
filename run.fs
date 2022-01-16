@@ -50,7 +50,6 @@ module Task =
                 "--self-contained"
                 "/p:PublishSingleFile=true"
                 "/p:PublishTrimmed=true"
-                "/p:PublishReadyToRun=true"
                 "/p:EnableCompressionInSingleFile=true"
                 "/p:IncludeNativeLibrariesForSelfExtract=true"
                 "/p:DebugType=None"
